@@ -13,5 +13,6 @@ public class Posting {
     private Integer userid;
     private Integer catid;
     private String content;
+    private String imageurl;
 
 }

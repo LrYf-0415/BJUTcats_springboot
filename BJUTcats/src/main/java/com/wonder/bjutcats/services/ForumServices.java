@@ -2,6 +2,7 @@ package com.wonder.bjutcats.services;
 
 import com.wonder.bjutcats.pojo.Meal;
 import com.wonder.bjutcats.pojo.Posting;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,5 +22,8 @@ public interface ForumServices {
 
     // 根据传入参数添加Posting条目
     public Integer postPosting(Integer userid , Integer catid , String content);
+
+    // 传入帖子id修改帖子图片，返回值为图片imageurl
+    public String setUPostImage(Integer postid , MultipartFile files);
 
 }
