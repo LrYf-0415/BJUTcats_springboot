@@ -68,7 +68,7 @@ public class ObjectServicesImpl implements ObjectServices{
         // 获取原先文件名称
         String filename = files.getOriginalFilename();
         // 设置在服务器存储位置
-        String url = "D:/Files/Programing/BJUTcats/image/storage/user/" + tmp.getUsername().toString() + "/" + filename;
+        String url = "D:/Files/Programing/BJUTcats/storage/image/user/" + tmp.getUsername().toString() + "/" + filename;
         // 存储在数据库中的url
         String url_db = "/api/storage/image/user/" + tmp.getUsername().toString() + "/" + filename;
         // 指定图片存放位置，若目标路径存在图像则覆盖(更新头像)
@@ -94,9 +94,9 @@ public class ObjectServicesImpl implements ObjectServices{
         // 获取原先文件名称
         String filename = files.getOriginalFilename();
         // 设置在服务器存储位置
-        String url = "D:/Files/Programing/BJUTcats/image/storage/user/" + tmp.getName().toString() + "/" + filename;
+        String url = "D:/Files/Programing/BJUTcats/storage/image/cat/" + tmp.getName().toString() + "/" + filename;
         // 编写存储在数据库中的url
-        String url_db = "/api/storage/image/user/" + tmp.getName().toString() + "/" + filename;
+        String url_db = "/api/storage/image/cat/" + tmp.getName().toString() + "/" + filename;
         // 将图片存储，若目标路径存在则覆盖
         File file = new File(url);
         if(!file.exists()){

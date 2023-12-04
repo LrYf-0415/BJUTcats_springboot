@@ -76,7 +76,7 @@ public class ForumServicesImpl implements ForumServices {
         // 获取原先文件名称
         String filename = files.getOriginalFilename();
         // 设置在服务器存储位置
-        String url = "D:\\Files\\Programing\\BJUTcats\\image\\storage\\posts\\" + tmp.getUserid().toString() + tmp.getCatid().toString() + new Date().getTime() + "\\" + filename;
+        String url = "D:/Files/Programing/BJUTcats/storage/image/posts/" + tmp.getUserid().toString() + tmp.getCatid().toString() + new Date().getTime() + "\\" + filename;
         // 存储在数据库中的url
         String url_db = "/api/storage/image/posts/" + tmp.getUserid().toString() + tmp.getCatid().toString() + new Date().getTime() + "/" + filename;
         // 指定图片存放位置，若目标路径存在图像则覆盖(更新头像)
