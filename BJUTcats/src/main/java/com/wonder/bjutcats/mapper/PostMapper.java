@@ -20,10 +20,6 @@ public interface PostMapper {
     @Select("select id , userid , catid , content , imageurl from posting")
     public List<Posting> getAllPost();
 
-    // 传入userid，catid，content插入新条目
-    @Insert("insert into posting(userid , catid , content)" + "values (#{userid} , #{catid} , #{content})")
-    public Integer insertPosting(Integer userid , Integer catid , String content);
-
     // 传入帖子id修改帖子图片链接
     @Update("update posting set imageurl = #{imageurl} where id = #{postid}")
     public Integer setUserImageUrl(Integer postid , String imageurl);
@@ -32,5 +28,8 @@ public interface PostMapper {
     @Select("select id , userid , catid , content , imageurl from posting")
     public Posting getPostId(Integer id);
 
+    // 下列函数使用xml文件实现
+    // 传入userid，catid，content插入新条目
+    public Integer insertPosting(Integer userid , Integer catid , String content);
 
 }

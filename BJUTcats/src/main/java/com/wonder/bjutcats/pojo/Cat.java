@@ -15,7 +15,8 @@ public class Cat {
     private String color;
     private Integer status;
     private Integer campus;
-    private Integer location;
+    private String location;
     private String detail;
+    private String imageurl;
 
 }

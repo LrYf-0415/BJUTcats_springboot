@@ -1,5 +1,6 @@
 package com.wonder.bjutcats.services;
 
+import com.wonder.bjutcats.mapper.FeedMapper;
 import com.wonder.bjutcats.mapper.PostMapper;
 import com.wonder.bjutcats.mapper.ThumbMapper;
 import com.wonder.bjutcats.pojo.Meal;
@@ -20,35 +21,52 @@ public class ForumServicesImpl implements ForumServices {
 
     @Autowired
     private PostMapper postMapper;
+    private FeedMapper feedMapper;
 
-    // 传入小猫id获取该小猫的投喂记录
-    public List<Meal> getFeedList(Integer catid){
-        List<Meal> result = new ArrayList<Meal>();
+    // 处理GET请求部分
+    // 根据小猫id查询小猫被投喂记录
+    public List<Meal> getFeedByCat(Integer catid){
+        List<Meal> result = feedMapper.getFeedCat(catid);
         return result;
     }
 
     // 传入小猫id获取该小猫相关动态
-    public List<Posting> getCatPostList(Integer catid)
+    public List<Posting> getPostByCat(Integer catid)
     {
-        List<Posting> result = new ArrayList<Posting>();
+        List<Posting> result = postMapper.getPostCat(catid);
+        return result;
+    }
+
+    // 传入用户id获取该用户投喂记录
+    public List<Meal> getFeedByUser(Integer userid){
+        List<Meal> result = feedMapper.getFeedUser(userid);
         return result;
     }
 
     // 传入用户id获取该用户发布的动态
-    public List<Posting> getPostList(Integer userid)
+    public List<Posting> getPostByUser(Integer userid)
     {
-        List<Posting> result = new ArrayList<Posting>();
+        // userid < 0表示获取全部的动态列表
+        if(userid < 0){
+            List<Posting> result = postMapper.getAllPost();
+            return result;
+        }
+        List<Posting> result = postMapper.getPostUser(userid);
         return result;
     }
 
+    // 处理POST请求部分
     // 根据传入参数添加Feed条目
     public Integer postFeed(Integer userid , Integer catid , String food){
-        return 0;
+        Integer affectrows = feedMapper.insertFeed(userid , catid , food);
+        // return结果为该次请求影响数据库的行数
+        return affectrows;
     }
 
     // 根据传入参数添加Posting条目
     public Integer postPosting(Integer userid , Integer catid , String content){
-        return 0;
+        Integer affectrows = postMapper.insertPosting(userid , catid , content);
+        return affectrows;
     }
 
     // 传入帖子id修改帖子图片，返回值为图片imageurl
@@ -73,7 +91,6 @@ public class ForumServicesImpl implements ForumServices {
         } catch(IOException e){
             e.printStackTrace();
         }
-
         // 返回图片位置
         return url_db;
     }

@@ -8,14 +8,17 @@ import java.util.List;
 
 public interface ForumServices {
 
-    // 传入小猫id获取该小猫的投喂记录
-    public List<Meal> getFeedList(Integer catid);
+    // 传入小猫id获取小猫被投喂记录
+    public List<Meal> getFeedByCat(Integer catid);
 
     // 传入小猫id获取该小猫相关动态
-    public List<Posting> getCatPostList(Integer catid);
+    public List<Posting> getPostByCat(Integer catid);
+
+    // 传入用户id获取用户投喂小猫记录
+    public List<Meal> getFeedByUser(Integer userid);
 
     // 传入用户id获取该用户发布的动态
-    public List<Posting> getPostList(Integer userid);
+    public List<Posting> getPostByUser(Integer userid);
 
     // 根据传入参数添加Feed条目
     public Integer postFeed(Integer userid , Integer catid , String food);

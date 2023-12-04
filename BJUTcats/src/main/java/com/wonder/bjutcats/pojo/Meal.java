@@ -13,6 +13,5 @@ public class Meal {
     private Integer userid;
     private Integer catid;
     private String food;
-    private String imageurl;
 
 }
