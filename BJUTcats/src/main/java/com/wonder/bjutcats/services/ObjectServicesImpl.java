@@ -1,5 +1,6 @@
 package com.wonder.bjutcats.services;
 
+import com.wonder.bjutcats.mapper.CatMapper;
 import com.wonder.bjutcats.mapper.FeedMapper;
 import com.wonder.bjutcats.mapper.UserMapper;
 import com.wonder.bjutcats.pojo.Cat;
@@ -17,12 +18,14 @@ import java.util.List;
 public class ObjectServicesImpl implements ObjectServices{
 
     @Autowired
+    private CatMapper catMapper;
+    @Autowired
     private UserMapper userMapper;
 
     // 处理GET请求部分
     // 传入小猫id获取小猫对象
     public Cat getCat(Integer catid){
-        Cat result = new Cat();
+        Cat result = catMapper.getCatById(catid);
         return result;
     }
 
@@ -34,7 +37,7 @@ public class ObjectServicesImpl implements ObjectServices{
 
     // 返回符合id(校区id)的小猫对象信息
     public List<Cat> getCatList(Integer campusid){
-        List<Cat> result = new ArrayList<Cat>();
+        List<Cat> result = catMapper.getCatSortCampus(campusid);
         return result;
     }
 

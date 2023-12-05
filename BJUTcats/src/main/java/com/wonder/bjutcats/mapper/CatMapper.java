@@ -10,7 +10,7 @@ import java.util.List;
 public interface CatMapper {
 
     @Select("select id , name , gender , color , status , campus , location , detail , imageurl from cats where id = #{catid}")
-    public List<Cat> getCatById(Integer catid);
+    public Cat getCatById(Integer catid);
 
     @Select("select id , name , gender , color , status , campus , location , detail , imageurl from cats where campus = #{campusid}")
     public List<Cat> getCatSortCampus(Integer campusid);

@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wonder.bjutcats.mapper.PostMapper">
     <insert id="insertPosting">
-        insert into posting(userid , catid , content)
-        values (#{userid} , #{catid} , #{content})
+        insert into posting(userid, catid, content)
+        values (#{userid}, #{catid}, #{content});
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
             SELECT LAST_INSERT_ID();
         </selectKey>

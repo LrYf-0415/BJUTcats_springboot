@@ -9,7 +9,9 @@ import com.wonder.bjutcats.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class CatData {
 
     @Autowired
     private ObjectServices objectServices;
+    @Autowired
     private ForumServices forumServices;
 
     @RequestMapping(value = "catinfo/list" , method = RequestMethod.GET)
@@ -50,6 +53,15 @@ public class CatData {
         List<Posting> result = forumServices.getPostByCat(id);
         // 发送响应信息
         return Result.success(result);
+    }
+
+    // 小猫图片上传
+    @RequestMapping(value = "catinfo/image" , method = RequestMethod.POST , consumes = "multipart/form-data")
+    public Result upload(@RequestParam("catid") Integer catid , @RequestParam("image") MultipartFile files){
+        // 调用Services层方法
+        String target = objectServices.setCatImage(catid , files);
+        // 返回响应
+        return Result.success(target);
     }
 
 }

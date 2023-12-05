@@ -21,6 +21,7 @@ public class ForumServicesImpl implements ForumServices {
 
     @Autowired
     private PostMapper postMapper;
+    @Autowired
     private FeedMapper feedMapper;
 
     // 处理GET请求部分

@@ -22,10 +22,10 @@ public class UserData {
     }
 
     @RequestMapping(value = "/user/newuser" , method = RequestMethod.POST)
-    public Result newUserInfo(String username , Integer gender , String emails , String phone){
+    public Result newUserInfo(@RequestBody User user){
         // 调用Services层方法
         try{
-            Integer mark = objectServices.insertUserInfo(username , gender , emails , phone);
+            Integer mark = objectServices.insertUserInfo(user.getUsername() , user.getGender() , user.getEmails() , user.getPhone());
             if(mark == 0){
                 return Result.success(0);
             }
@@ -39,10 +39,10 @@ public class UserData {
     }
 
     @RequestMapping(value = "/user/setinfo" , method = RequestMethod.POST)
-    public Result setUserInfo(Integer id , String username , Integer gender , String emails , String phone){
+    public Result setUserInfo(@RequestBody User user){
         // 调用Services层方法
         try{
-            Integer mark = objectServices.updateUserInfo(id , username , gender , emails , phone);
+            Integer mark = objectServices.updateUserInfo(user.getId() , user.getUsername() , user.getGender() , user.getEmails() , user.getPhone());
             if(mark == 0){
                 return Result.success(0);
             }
