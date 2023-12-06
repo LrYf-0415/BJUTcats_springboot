@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Meal {
 
     private Integer id;
-    private Integer userid;
+    private String userid;
     private Integer catid;
     private String food;
 

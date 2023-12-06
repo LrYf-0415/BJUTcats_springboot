@@ -19,7 +19,7 @@ public class ForumData {
     ForumServices forumServices;
 
     @RequestMapping(value = "/socialinfo/tweet" , method = RequestMethod.GET)
-    public Result getPostsByUser(Integer id){
+    public Result getPostsByUser(String id){
         try{
             // 调用Services层方法
             List<Posting> result = forumServices.getPostByUser(id);

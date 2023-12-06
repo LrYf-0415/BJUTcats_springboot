@@ -10,6 +10,6 @@ public interface ThumbMapper {
     public Integer countThumbCat(Integer catid);
 
     @Select("select count(*) from thumb where userid = #{userid}")
-    public Integer countThumbUser(Integer userid);
+    public Integer countThumbUser(String userid);
 
 }

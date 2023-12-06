@@ -15,7 +15,7 @@ public interface PostMapper {
     public List<Posting> getPostCat(Integer catid);
 
     @Select("select id , userid , catid , content , imageurl from posting where userid = #{userid}")
-    public List<Posting> getPostUser(Integer userid);
+    public List<Posting> getPostUser(String userid);
 
     @Select("select id , userid , catid , content , imageurl from posting")
     public List<Posting> getAllPost();
@@ -30,6 +30,6 @@ public interface PostMapper {
 
     // 下列函数使用xml文件实现
     // 传入userid，catid，content插入新条目
-    public Integer insertPosting(Integer userid , Integer catid , String content);
+    public Integer insertPosting(String userid , Integer catid , String content);
 
 }

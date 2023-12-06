@@ -16,17 +16,20 @@ public interface ObjectServices {
     public Cat getCat(Integer catid);
 
     // 传入id搜索该id的所有信息
-    public User getUserInfo(Integer userid);
+    public User getUserInfo(String userid);
 
     // 处理POST请求部分
     // 插入一条用户记录
-    public Integer insertUserInfo(String username , Integer gender , String emails , String phone);
+    public Integer insertUserInfo(String userid , String username , Integer gender , String emails , String phone , String sessionkey);
 
     // 根据id修改用户记录
-    public Integer updateUserInfo(Integer userid , String username , Integer gender , String emails , String phone);
+    public Integer updateUserInfo(String userid , String username , Integer gender , String emails , String phone);
+
+    // 根据id修改用户token
+    public Integer updateUserToken(String userid , String sessionkey);
 
     // 传入用户id修改用户头像，返回值为用户imageurl
-    public String setUserImage(Integer userid , MultipartFile files);
+    public String setUserImage(String userid , MultipartFile files);
 
     // 传入小猫id修改小猫照片，返回值为小猫imageurl
     public String setCatImage(Integer catid , MultipartFile files);

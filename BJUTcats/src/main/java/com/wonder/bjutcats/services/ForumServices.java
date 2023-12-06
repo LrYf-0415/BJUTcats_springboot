@@ -15,16 +15,16 @@ public interface ForumServices {
     public List<Posting> getPostByCat(Integer catid);
 
     // 传入用户id获取用户投喂小猫记录
-    public List<Meal> getFeedByUser(Integer userid);
+    public List<Meal> getFeedByUser(String userid);
 
     // 传入用户id获取该用户发布的动态
-    public List<Posting> getPostByUser(Integer userid);
+    public List<Posting> getPostByUser(String userid);
 
     // 根据传入参数添加Feed条目
-    public Integer postFeed(Integer userid , Integer catid , String food);
+    public Integer postFeed(String userid , Integer catid , String food);
 
     // 根据传入参数添加Posting条目
-    public Integer postPosting(Integer userid , Integer catid , String content);
+    public Integer postPosting(String userid , Integer catid , String content);
 
     // 传入帖子id修改帖子图片，返回值为图片imageurl
     public String setUPostImage(Integer postid , MultipartFile files);

@@ -16,7 +16,7 @@ public class UserData {
     private ObjectServices objectServices;
 
     @RequestMapping(value = "/user/info" , method = RequestMethod.GET)
-    public Result getUserInfo(Integer id){
+    public Result getUserInfo(String id){
         try{
             // 调用Services层方法
             User target = objectServices.getUserInfo(id);
@@ -28,22 +28,22 @@ public class UserData {
         }
     }
 
-    @RequestMapping(value = "/user/newuser" , method = RequestMethod.POST)
-    public Result newUserInfo(@RequestBody User user){
-        // 调用Services层方法
-        try{
-            Integer mark = objectServices.insertUserInfo(user.getUsername() , user.getGender() , user.getEmails() , user.getPhone());
-            if(mark == 0){
-                return Result.success(0);
-            }
-            else{
-                return Result.error("error: update");
-            }
-        } catch(Exception e){
-            log.info("error happend: " , e);
-            return Result.error("something error happened");
-        }
-    }
+//    @RequestMapping(value = "/user/newuser" , method = RequestMethod.POST)
+//    public Result newUserInfo(@RequestBody User user){
+//        // 调用Services层方法
+//        try{
+//            Integer mark = objectServices.insertUserInfo(user.getId() , user.getUsername() , user.getGender() , user.getEmails() , user.getPhone() , user.getToken());
+//            if(mark == 0){
+//                return Result.success(0);
+//            }
+//            else{
+//                return Result.error("error: update");
+//            }
+//        } catch(Exception e){
+//            log.info("error happend: " , e);
+//            return Result.error("something error happened");
+//        }
+//    }
 
     @RequestMapping(value = "/user/setinfo" , method = RequestMethod.POST)
     public Result setUserInfo(@RequestBody User user){
@@ -64,7 +64,7 @@ public class UserData {
 
     // 传入用户id和图片文件存储用户头像，返回存储的url地址
     @RequestMapping(value = "/user/image" , method = RequestMethod.POST , consumes = "multipart/form-data")
-    public Result upload(@RequestParam("userid") Integer userid , @RequestParam("image") MultipartFile files){
+    public Result upload(@RequestParam("userid") String userid , @RequestParam("image") MultipartFile files){
         try{
             // 调用Services层方法进行存储
             String target = objectServices.setUserImage(userid , files);

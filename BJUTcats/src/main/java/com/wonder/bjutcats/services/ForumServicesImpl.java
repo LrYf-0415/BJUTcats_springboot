@@ -6,6 +6,8 @@ import com.wonder.bjutcats.mapper.ThumbMapper;
 import com.wonder.bjutcats.pojo.Meal;
 import com.wonder.bjutcats.pojo.Posting;
 import com.wonder.bjutcats.pojo.User;
+import com.wonder.bjutcats.util.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Component
 public class ForumServicesImpl implements ForumServices {
 
@@ -27,47 +30,77 @@ public class ForumServicesImpl implements ForumServices {
     // 处理GET请求部分
     // 根据小猫id查询小猫被投喂记录
     public List<Meal> getFeedByCat(Integer catid){
-        List<Meal> result = feedMapper.getFeedCat(catid);
-        return result;
+        try{
+            List<Meal> result = feedMapper.getFeedCat(catid);
+            return result;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return new ArrayList<Meal>();
+        }
     }
 
     // 传入小猫id获取该小猫相关动态
     public List<Posting> getPostByCat(Integer catid)
     {
-        List<Posting> result = postMapper.getPostCat(catid);
-        return result;
+        try{
+            List<Posting> result = postMapper.getPostCat(catid);
+            return result;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return new ArrayList<Posting>();
+        }
     }
 
     // 传入用户id获取该用户投喂记录
-    public List<Meal> getFeedByUser(Integer userid){
-        List<Meal> result = feedMapper.getFeedUser(userid);
-        return result;
+    public List<Meal> getFeedByUser(String userid){
+        try{
+            List<Meal> result = feedMapper.getFeedUser(userid);
+            return result;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return new ArrayList<Meal>();
+        }
     }
 
     // 传入用户id获取该用户发布的动态
-    public List<Posting> getPostByUser(Integer userid)
+    public List<Posting> getPostByUser(String userid)
     {
-        // userid < 0表示获取全部的动态列表
-        if(userid < 0){
-            List<Posting> result = postMapper.getAllPost();
+        try{
+            // userid为空串表示获取全部的动态列表
+            if(userid == ""){
+                List<Posting> result = postMapper.getAllPost();
+                return result;
+            }
+            List<Posting> result = postMapper.getPostUser(userid);
             return result;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return new ArrayList<Posting>();
         }
-        List<Posting> result = postMapper.getPostUser(userid);
-        return result;
     }
 
     // 处理POST请求部分
     // 根据传入参数添加Feed条目
-    public Integer postFeed(Integer userid , Integer catid , String food){
-        Integer affectrows = feedMapper.insertFeed(userid , catid , food);
-        // return结果为该次请求影响数据库的行数
-        return affectrows;
+    public Integer postFeed(String userid , Integer catid , String food){
+        try{
+            Integer affectrows = feedMapper.insertFeed(userid , catid , food);
+            // return结果为该次请求影响数据库的行数
+            return affectrows;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return 0;
+        }
     }
 
     // 根据传入参数添加Posting条目
-    public Integer postPosting(Integer userid , Integer catid , String content){
-        Integer affectrows = postMapper.insertPosting(userid , catid , content);
-        return affectrows;
+    public Integer postPosting(String userid , Integer catid , String content){
+        try{
+            Integer affectrows = postMapper.insertPosting(userid , catid , content);
+            return affectrows;
+        } catch(Exception e){
+            log.info("error happend: " , e);
+            return 0;
+        }
     }
 
     // 传入帖子id修改帖子图片，返回值为图片imageurl
