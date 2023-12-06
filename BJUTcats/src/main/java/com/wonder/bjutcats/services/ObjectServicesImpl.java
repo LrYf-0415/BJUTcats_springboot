@@ -41,6 +41,9 @@ public class ObjectServicesImpl implements ObjectServices{
     public User getUserInfo(String userid){
         try{
             User result = userMapper.getUserInfo(userid);
+            if(result == null){
+                return new User();
+            }
             return result;
         } catch(Exception e){
             log.info("error happend: " , e);
